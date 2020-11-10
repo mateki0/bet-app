@@ -10,7 +10,7 @@ const NavListItem = styled.li`
     color: #fff;
     font-size: 18px;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: medium;
   }
 `;
 
