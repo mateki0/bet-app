@@ -1,11 +1,11 @@
 import React from 'react';
 import Layout from 'Components/Layout';
-import Login from 'Components/Login';
+import Registration from 'Components/Registration';
 
 const RegistrationPage = () => {
   return (
     <Layout>
-      <Login isRegistration />
+      <Registration />
     </Layout>
   );
 };

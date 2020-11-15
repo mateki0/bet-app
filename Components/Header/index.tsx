@@ -9,7 +9,25 @@ import NavListItem from './styled/NavListItem';
 import Loupe from '../../assets/icons/loupe.svg';
 import InputWrapper from './styled/InputWrapper';
 import SearchButton from './styled/SearchButton';
+import { auth } from '../../firebase';
+import LogoutButton from './styled/LogoutButton';
 const Header = () => {
+  const [currentUser, setCurrentUser] = React.useState(null);
+
+  React.useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        setCurrentUser(user);
+        localStorage.setItem('currentUser', user.uid);
+      } else {
+        setCurrentUser(null);
+        localStorage.removeItem('currentUser');
+      }
+    });
+  }, []);
+  const handleLogout = () => {
+    auth.signOut();
+  };
   return (
     <header>
       <Navigation>
@@ -32,7 +50,11 @@ const Header = () => {
               <Link href="/wiadomosci">Wiadomości</Link>
             </NavListItem>
             <NavListItem>
-              <Link href="/logowanie">Zaloguj się</Link>
+              {currentUser ? (
+                <LogoutButton onClick={handleLogout}>Wyloguj się</LogoutButton>
+              ) : (
+                <Link href="/logowanie">Zaloguj się</Link>
+              )}
             </NavListItem>
           </NavList>
         </Menu>

@@ -2,10 +2,16 @@ import * as React from 'react';
 import ButtonWrapper from './styled/ButtonWrapper';
 import StyledButton from './styled/StyledButton';
 
-const Button = ({ text }: { text: string }) => {
+interface ButtonProps {
+  text: string;
+  handleSign: (e: { preventDefault: () => void }) => void;
+}
+const Button = ({ text, handleSign }: ButtonProps) => {
   return (
     <ButtonWrapper>
-      <StyledButton type="submit">{text}</StyledButton>
+      <StyledButton type="submit" onClick={handleSign}>
+        {text}
+      </StyledButton>
     </ButtonWrapper>
   );
 };

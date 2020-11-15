@@ -1,15 +1,15 @@
 import Link from 'next/link';
 import * as React from 'react';
-import Button from './Button';
-import Input from './Input';
-import Form from './styled/Form';
-import JoinUs from './styled/JoinUs';
-import LinkWrapper from './styled/LinkWrapper';
-import LoginContainer from './styled/LoginContainer';
-import RegisterHref from './styled/RegisterHref';
+import Button from '../Login/Button';
+import Input from '../Login/Input';
+import Form from '../Login/styled/Form';
+import JoinUs from '../Login/styled/JoinUs';
+import LinkWrapper from '../Login/styled/LinkWrapper';
+import LoginContainer from '../Login/styled/LoginContainer';
+import RegisterHref from '../Login/styled/RegisterHref';
 import { auth } from '../../firebase';
 
-const Login = () => {
+const Registration = () => {
   const [inputsContent, setInputsContent] = React.useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
@@ -25,12 +25,12 @@ const Login = () => {
     });
   };
 
-  const handleSignIn = (e: { preventDefault: () => void }) => {
+  const handleSignUp = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     auth
-      .signInWithEmailAndPassword(email, password)
-      .catch((error) => alert(`Email jest już zajęty, ${error}`));
-    window.location.href = '/';
+      .createUserWithEmailAndPassword(email, password)
+      .catch((error) => alert(`Email lub hasło są nieprawidłowe, ${error}`));
+    window.location.href = '/logowanie';
   };
   return (
     <>
@@ -43,23 +43,20 @@ const Login = () => {
             type="password"
             handleInputChange={handleInputChange}
           />
-          <Button text="Zaloguj się" handleSign={handleSignIn} />
+          <Button text="Załóż konto" handleSign={handleSignUp} />
         </Form>
         <LinkWrapper>
-          <h2>Nie masz jeszcze konta ?</h2>
+          <h2>Masz juz konto ?</h2>
           <RegisterHref>
-            <Link href="/rejestracja">Załóż je tutaj</Link>
+            <Link href="/logowanie">Zaloguj się</Link>
           </RegisterHref>
         </LinkWrapper>
       </LoginContainer>
       <JoinUs>
-        <h2>Zaloguj się, aby móc obstawiać mecze CS:GO</h2>
+        <h2>Załóż konto w naszym serwisie, aby móc obstawiać mecze CS:GO</h2>
       </JoinUs>
     </>
   );
 };
 
-export default Login;
-{
-  /* <h2>Załóż konto w naszym serwisie, aby móc obstawiać mecze CS:GO</h2> */
-}
+export default Registration;

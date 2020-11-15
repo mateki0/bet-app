@@ -9,16 +9,17 @@ interface InputProps {
   name: string;
   label: string;
   type: string;
+  handleInputChange: (e: { target: { name: string; value: string } }) => void;
 }
 
-const Input = ({ name, label, type }: InputProps) => {
+const Input = ({ name, label, type, handleInputChange }: InputProps) => {
   return (
     <InputContainer>
       <LabelWrapper>
-        <StyledLabel>{label}</StyledLabel>
+        <StyledLabel htmlFor={name}>{label}</StyledLabel>
         <ValidationError></ValidationError>
       </LabelWrapper>
-      <StyledInput name={name} id={name} type={type} />
+      <StyledInput name={name} id={name} type={type} onChange={handleInputChange} />
     </InputContainer>
   );
 };
