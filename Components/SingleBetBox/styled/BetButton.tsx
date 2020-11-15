@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
-const BetButton = styled.button`
+const BetButton = styled.button<{ backgroundSrc: string }>`
+  position: relative;
   background-color: transparent;
   border: none;
   border-radius: 8px;
@@ -12,6 +13,21 @@ const BetButton = styled.button`
   width: 110px;
   &:hover {
     cursor: pointer;
+  }
+
+  ::after {
+    content: '';
+    background-image: url(${(props) => props.backgroundSrc});
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    opacity: 0.2;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 30%;
+    right: 0;
+    z-index: -1;
   }
 `;
 export default BetButton;

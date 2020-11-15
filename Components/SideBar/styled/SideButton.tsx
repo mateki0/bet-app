@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 
-const SideButton = styled.button`
+const SideButton = styled.a`
   background-color: transparent;
   border: none;
   color: #fff;
   font-size: 18px;
+  transition: all 0.2s;
   &:hover {
-    cursor: pointer;
+    color: rgba(255, 255, 255, 0.7);
   }
 `;
 

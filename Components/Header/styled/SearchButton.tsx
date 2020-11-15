@@ -6,7 +6,7 @@ const SearchButton = styled.button`
   font-weight: bold;
   position: absolute;
   right: 0;
-  top: 50%;
+  top: 55%;
   transform: translate(-50%, -50%);
 
   &:hover {

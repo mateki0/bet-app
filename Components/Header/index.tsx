@@ -26,13 +26,13 @@ const Header = () => {
               <Link href="/">Strona Główna</Link>
             </NavListItem>
             <NavListItem>
-              <Link href="/">Wiadomości</Link>
+              <Link href="/mecze">Mecze</Link>
             </NavListItem>
             <NavListItem>
-              <Link href="/">Konto</Link>
+              <Link href="/wiadomosci">Wiadomości</Link>
             </NavListItem>
             <NavListItem>
-              <Link href="/">Kontakt</Link>
+              <Link href="/logowanie">Zaloguj się</Link>
             </NavListItem>
           </NavList>
         </Menu>

@@ -6,50 +6,72 @@ import ButtonsWrapper from './styled/ButtonsWrapper';
 import DateBox from './styled/DateBox';
 import Day from './styled/Day';
 import Hour from './styled/Hour';
+import LeftColumnWrapper from './styled/LeftColumnWrapper';
+import StarsWrapper from './styled/StarsWrapper';
 import Team from './styled/Team';
 import TeamLogo from './styled/TeamLogo';
 import TeamName from './styled/TeamName';
 import TeamsBox from './styled/TeamsBox';
 import TournamentName from './styled/TournamentName';
+import Star from '../../assets/icons/star.svg';
 
 interface BoxProps {
-  team1?: string;
-  team2?: string;
-  date?: string;
-  team1Course?: number;
-  team2Course?: number;
-  eventName?: string;
+  match: {
+    team1: {
+      name: string;
+      id: number;
+    };
+    team2: {
+      name: string;
+      id: number;
+    };
+    date: number;
+    team1Course?: number;
+    team2Course?: number;
+    event: {
+      name: string;
+      id: number;
+    };
+    stars: number;
+  };
 }
-const SingleBetBox = ({ team1, team2, date, team1Course, team2Course, eventName }: BoxProps) => {
+const SingleBetBox = ({ match }: BoxProps) => {
+  const { date, team1, team2, stars, event } = match;
+
+  const starsDiv = [];
+  for (let i = 0; i <= stars; i++) {
+    starsDiv.push(<Star width="12px" height="12px" key={i} />);
+  }
   return (
     <BoxWrapper>
-      <div>
+      <LeftColumnWrapper>
         <DateBox>
           <div>
-            <Hour>18:00</Hour>
-            <Day>12.11.2020</Day>
+            <Hour>{new Date(date).toLocaleTimeString().slice(0, -3)}</Hour>
+            <Day>{new Date(date).toLocaleDateString()}</Day>
           </div>
-          <TournamentName>Flashpoint</TournamentName>
+          <TournamentName>{event.name}</TournamentName>
         </DateBox>
         <TeamsBox>
+          <StarsWrapper>{starsDiv}</StarsWrapper>
           <Team>
-            <TeamLogo />
-            <TeamName>Virtus Pro</TeamName>
+            <TeamLogo src={`https://static.hltv.org/images/team/logo/${team1.id}`} />
+            <TeamName>{team1.name}</TeamName>
           </Team>
           <Team>
-            <TeamLogo />
-            <TeamName>Natus Vincere</TeamName>
+            <TeamLogo src={`https://static.hltv.org/images/team/logo/${team2.id}`} />
+            <TeamName>{team2.name}</TeamName>
           </Team>
         </TeamsBox>
-      </div>
+      </LeftColumnWrapper>
       <ButtonsWrapper>
-        <BetButton>
+        <BetButton backgroundSrc={`https://static.hltv.org/images/team/logo/${team1.id}`}>
           <ButtonSpan>1.62</ButtonSpan>
-          <ButtonSpan>Virtus Pro</ButtonSpan>
+          <ButtonSpan>{team1.name}</ButtonSpan>
         </BetButton>
-        <BetButton>
+        <BetButton backgroundSrc={`https://static.hltv.org/images/team/logo/${team2.id}`}>
           <ButtonSpan>2.02</ButtonSpan>
-          <ButtonSpan>Natus Vincere</ButtonSpan>
+          <ButtonSpan>{team2.name}</ButtonSpan>
         </BetButton>
       </ButtonsWrapper>
     </BoxWrapper>
