@@ -3,7 +3,6 @@ import * as React from 'react';
 import Button from './Button';
 import Input from './Input';
 import Form from './styled/Form';
-import JoinUs from './styled/JoinUs';
 import LinkWrapper from './styled/LinkWrapper';
 import LoginContainer from './styled/LoginContainer';
 import RegisterHref from './styled/RegisterHref';
@@ -27,11 +26,16 @@ const Login = () => {
 
   const handleSignIn = (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    auth
-      .signInWithEmailAndPassword(email, password)
-      .catch((error) => alert(`Email jest już zajęty, ${error}`));
-    window.location.href = '/';
+    auth.signInWithEmailAndPassword(email, password).catch((error) => {
+      alert(`Email jest już zajęty, ${error}`);
+    });
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        window.location.href = '/';
+      }
+    });
   };
+
   return (
     <>
       <LoginContainer>
@@ -52,9 +56,6 @@ const Login = () => {
           </RegisterHref>
         </LinkWrapper>
       </LoginContainer>
-      <JoinUs>
-        <h2>Zaloguj się, aby móc obstawiać mecze CS:GO</h2>
-      </JoinUs>
     </>
   );
 };

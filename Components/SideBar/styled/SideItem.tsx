@@ -10,7 +10,7 @@ const SideItem = styled.li<{ isRight?: boolean }>`
   transition: all 0.2s;
   font-size: 18px;
   &:not(:first-child) {
-    margin-top: 30px;
+    margin-top: ${(props) => (!props.isRight ? '30px' : '0')};
   }
 `;
 export default SideItem;

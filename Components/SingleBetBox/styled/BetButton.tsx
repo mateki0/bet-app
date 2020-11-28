@@ -1,8 +1,12 @@
 import styled from 'styled-components';
 
-const BetButton = styled.button<{ backgroundSrc: string }>`
+const BetButton = styled.button<{ backgroundSrc: string; isActive: boolean; isFirst: boolean }>`
   position: relative;
-  background-color: transparent;
+
+  background-color: ${(props) =>
+    (props.isActive && props.isFirst) || (props.isActive && !props.isFirst)
+      ? 'rgba(3, 252, 11, 0.2)'
+      : 'transparent'};
   border: none;
   border-radius: 8px;
   box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.3);

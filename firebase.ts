@@ -1,5 +1,7 @@
 import firebase from 'firebase/app';
+import 'firebase/analytics'
 import 'firebase/auth';
+import 'firebase/firestore';
 const firebaseConfig = {
   apiKey: "AIzaSyDYK1ynu0usQkSGcn6wmqZM48qm-0P8T0M",
   authDomain: "bet-app-5fa3e.firebaseapp.com",
@@ -10,6 +12,12 @@ const firebaseConfig = {
   appId: "1:766274440080:web:da601e2acbef2e575b8115"
 };
 if (!firebase.apps.length) {
-firebase.initializeApp(firebaseConfig);
+firebase.initializeApp({
+  ...firebaseConfig,
+  measurementId:process.env.REACT_APP_MEASUREMENT_ID,
+}
+  );
+firebase.analytics();
 }
 export const auth = firebase.auth();
+export const firestore = firebase.firestore();

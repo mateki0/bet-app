@@ -11,13 +11,14 @@ import InputWrapper from './styled/InputWrapper';
 import SearchButton from './styled/SearchButton';
 import { auth } from '../../firebase';
 import LogoutButton from './styled/LogoutButton';
+
 const Header = () => {
   const [currentUser, setCurrentUser] = React.useState(null);
-
   React.useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {
         setCurrentUser(user);
+
         localStorage.setItem('currentUser', user.uid);
       } else {
         setCurrentUser(null);
@@ -48,6 +49,9 @@ const Header = () => {
             </NavListItem>
             <NavListItem>
               <Link href="/wiadomosci">Wiadomości</Link>
+            </NavListItem>
+            <NavListItem>
+              <Link href="/konto">Konto</Link>
             </NavListItem>
             <NavListItem>
               {currentUser ? (

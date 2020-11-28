@@ -1,7 +1,7 @@
 import Boxes from 'Components/MiddleColumn/styled/Boxes';
 import styled from 'styled-components';
 
-const RightBarContainer = styled.section<{ isOpen: boolean }>`
+const BetsBarContainer = styled.section<{ isOpen: boolean }>`
   position: fixed;
   top: 0;
   bottom: 0;
@@ -22,4 +22,4 @@ const RightBarContainer = styled.section<{ isOpen: boolean }>`
     height: 100%;
   }
 `;
-export default RightBarContainer;
+export default BetsBarContainer;

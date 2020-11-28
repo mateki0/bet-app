@@ -11,6 +11,7 @@ import ThreadTitle from './styled/ThreadTitle';
 import ThreadText from './styled/ThreadText';
 import ThreadsWrapper from './styled/ThreadsWrapper';
 import ContentWrapper from './styled/ContentWrapper';
+
 interface MiddleProps {
   setIsLeftBarOpen: () => void;
   setIsRightBarOpen: () => void;

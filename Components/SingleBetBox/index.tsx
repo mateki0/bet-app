@@ -14,6 +14,7 @@ import TeamName from './styled/TeamName';
 import TeamsBox from './styled/TeamsBox';
 import TournamentName from './styled/TournamentName';
 import Star from '../../assets/icons/star.svg';
+import { BetsContext } from 'BetsContext';
 
 interface BoxProps {
   match: {
@@ -33,15 +34,57 @@ interface BoxProps {
       id: number;
     };
     stars: number;
+    id: number;
   };
 }
 const SingleBetBox = ({ match }: BoxProps) => {
-  const { date, team1, team2, stars, event } = match;
-
+  const { date, team1, team2, stars, event, id } = match;
+  const { addBet, deleteBet, preparedUserBets } = React.useContext(BetsContext);
+  const firstTeamCourse = 1.62;
+  const secondTeamCourse = 2.02;
   const starsDiv = [];
   for (let i = 0; i <= stars; i++) {
     starsDiv.push(<Star width="12px" height="12px" key={i} />);
   }
+  type Team = {
+    name: string;
+    id: number;
+  };
+  const handleActive = (
+    team1: Team,
+    team2: Team,
+    bet: number,
+    course: number,
+    matchId: number,
+    date: number
+  ) => {
+    if (!team1.id || !team2.id) {
+      alert('Jedna z drużyn nie jest jeszcze znana');
+      return;
+    }
+
+    const found = preparedUserBets.find((match) => match.matchId === matchId);
+    if (!found) {
+      addBet(team1.name, team1.id, team2.name, team2.id, bet, course, matchId, date);
+    }
+    if (found && found.matchId === matchId && found.bet !== bet) {
+      deleteBet(matchId);
+      addBet(team1.name, team1.id, team2.name, team2.id, bet, course, matchId, date);
+    } else if (found && found.matchId === matchId && found.bet === bet) {
+      deleteBet(matchId);
+    }
+  };
+  const saveToLocalStorage = React.useCallback(() => {
+    if (preparedUserBets.length) {
+      window.localStorage.setItem('preparedUserBets', JSON.stringify(preparedUserBets));
+    }
+  }, [preparedUserBets]);
+
+  React.useEffect(() => {
+    return () => {
+      saveToLocalStorage();
+    };
+  }, [preparedUserBets]);
   return (
     <BoxWrapper>
       <LeftColumnWrapper>
@@ -65,12 +108,22 @@ const SingleBetBox = ({ match }: BoxProps) => {
         </TeamsBox>
       </LeftColumnWrapper>
       <ButtonsWrapper>
-        <BetButton backgroundSrc={`https://static.hltv.org/images/team/logo/${team1.id}`}>
-          <ButtonSpan>1.62</ButtonSpan>
+        <BetButton
+          backgroundSrc={`https://static.hltv.org/images/team/logo/${team1.id}`}
+          isActive={preparedUserBets.some((a) => a.matchId === id && a.bet === 1)}
+          isFirst={true}
+          onClick={() => handleActive(team1, team2, 1, firstTeamCourse, id, date)}
+        >
+          <ButtonSpan>{firstTeamCourse}</ButtonSpan>
           <ButtonSpan>{team1.name}</ButtonSpan>
         </BetButton>
-        <BetButton backgroundSrc={`https://static.hltv.org/images/team/logo/${team2.id}`}>
-          <ButtonSpan>2.02</ButtonSpan>
+        <BetButton
+          backgroundSrc={`https://static.hltv.org/images/team/logo/${team2.id}`}
+          isActive={preparedUserBets.some((a) => a.matchId === id && a.bet === 2)}
+          isFirst={false}
+          onClick={() => handleActive(team1, team2, 2, secondTeamCourse, id, date)}
+        >
+          <ButtonSpan>{secondTeamCourse}</ButtonSpan>
           <ButtonSpan>{team2.name}</ButtonSpan>
         </BetButton>
       </ButtonsWrapper>

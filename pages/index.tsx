@@ -4,8 +4,10 @@ import MiddleColumn from 'Components/MiddleColumn';
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import HLTV from 'hltv';
-import LeftBar from 'Components/SideBar/LeftBar';
-import RightBar from 'Components/SideBar/RightBar';
+import TournamentsBar from 'Components/SideBar/TournamentsBar';
+import BetsBar from 'Components/SideBar/BetsBar';
+import { BetsContext } from 'BetsContext';
+import HomePage from 'Components/Layout/styled/HomePage';
 export interface MatchesProps {
   matches: {
     id: number;
@@ -36,17 +38,30 @@ interface SingleEvent {
 export interface EventsProps {
   events?: SingleEvent[];
 }
-export interface PlayersProps {
-  players: {
-    id: number;
-    name: string;
-    rating: number;
-  }[];
-}
 
-const Home = ({ matches, events, players }: MatchesProps & EventsProps & PlayersProps) => {
+const Home = ({ matches, events }: MatchesProps & EventsProps) => {
   const [isLeftBarOpen, setIsLeftBarOpen] = React.useState(false);
   const [isRightBarOpen, setIsRightBarOpen] = React.useState(false);
+  const { preparedUserBets, addBet } = React.useContext(BetsContext);
+  React.useEffect(() => {
+    const today = Date.now();
+    const localPreparedBets = JSON.parse(window.localStorage.getItem('preparedUserBets'));
+    const actualBets = localPreparedBets.length
+      ? localPreparedBets.filter((a) => a.date > today)
+      : [];
+    window.localStorage.setItem('preparedUserBets', JSON.stringify(actualBets));
+  }, []);
+  React.useEffect(() => {
+    const today = Date.now();
+    const localPreparedBets = JSON.parse(window.localStorage.getItem('preparedUserBets'));
+
+    if (!preparedUserBets.length && localPreparedBets && localPreparedBets.length) {
+      const actualBets = localPreparedBets.filter((a) => a.date > today);
+      actualBets.forEach((a) => {
+        addBet(a.team1Name, a.team1Id, a.team2Name, a.team2Id, a.bet, a.course, a.matchId, a.date);
+      });
+    }
+  }, []);
   matches.sort((a, b) => {
     if (a.stars === b.stars) {
       return a.date - b.date;
@@ -65,15 +80,17 @@ const Home = ({ matches, events, players }: MatchesProps & EventsProps & Players
   const filteredMatches = matches.filter((a) => a.team1 !== undefined && !a.live);
   return (
     <Layout>
-      <LeftBar events={events} isOpen={isLeftBarOpen} />
-      <MiddleColumn
-        matches={filteredMatches.slice(0, 10)}
-        setIsLeftBarOpen={toggleLeftBar}
-        setIsRightBarOpen={toggleRightBar}
-        isRightBarOpen={isRightBarOpen}
-        isLeftBarOpen={isLeftBarOpen}
-      />
-      <RightBar players={players} isOpen={isRightBarOpen} />
+      <HomePage>
+        <TournamentsBar events={events} isOpen={isLeftBarOpen} />
+        <MiddleColumn
+          matches={filteredMatches.slice(0, 10)}
+          setIsLeftBarOpen={toggleLeftBar}
+          setIsRightBarOpen={toggleRightBar}
+          isRightBarOpen={isRightBarOpen}
+          isLeftBarOpen={isLeftBarOpen}
+        />
+        <BetsBar isOpen={isRightBarOpen} />
+      </HomePage>
     </Layout>
   );
 };
@@ -81,12 +98,10 @@ const Home = ({ matches, events, players }: MatchesProps & EventsProps & Players
 export const getStaticProps: GetStaticProps = async () => {
   const matches = await HLTV.getMatches();
   const events = await HLTV.getOngoingEvents();
-  const players = await (await HLTV.getPlayerRanking({ startDate: '2020-01-01' })).slice(0, 15);
   return {
     props: {
       matches: JSON.parse(JSON.stringify(matches)),
       events: JSON.parse(JSON.stringify(events)),
-      players: JSON.parse(JSON.stringify(players)),
     },
   };
 };

@@ -3,7 +3,7 @@ import * as React from 'react';
 import Button from '../Login/Button';
 import Input from '../Login/Input';
 import Form from '../Login/styled/Form';
-import JoinUs from '../Login/styled/JoinUs';
+
 import LinkWrapper from '../Login/styled/LinkWrapper';
 import LoginContainer from '../Login/styled/LoginContainer';
 import RegisterHref from '../Login/styled/RegisterHref';
@@ -52,9 +52,6 @@ const Registration = () => {
           </RegisterHref>
         </LinkWrapper>
       </LoginContainer>
-      <JoinUs>
-        <h2>Załóż konto w naszym serwisie, aby móc obstawiać mecze CS:GO</h2>
-      </JoinUs>
     </>
   );
 };

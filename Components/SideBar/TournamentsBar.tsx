@@ -6,7 +6,7 @@ import SideItem from './styled/SideItem';
 import SideItemsList from './styled/SideItemsList';
 import { EventsProps } from 'pages';
 
-const LeftBar = ({ events, isOpen }: EventsProps & { isOpen: boolean }) => {
+const TournamentsBar = ({ events, isOpen }: EventsProps & { isOpen: boolean }) => {
   if (events) {
     return (
       <LeftBarContainer isOpen={isOpen}>
@@ -28,4 +28,4 @@ const LeftBar = ({ events, isOpen }: EventsProps & { isOpen: boolean }) => {
   );
 };
 
-export default LeftBar;
+export default TournamentsBar;
