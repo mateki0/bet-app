@@ -3,12 +3,8 @@ import Link from 'next/link';
 import Navigation from './styled/Navigation';
 import Menu from './styled/Menu';
 import AppName from './styled/AppName';
-import SearchInput from './styled/SearchInput';
 import NavList from './styled/NavList';
 import NavListItem from './styled/NavListItem';
-import Loupe from '../../assets/icons/loupe.svg';
-import InputWrapper from './styled/InputWrapper';
-import SearchButton from './styled/SearchButton';
 import { auth } from '../../firebase';
 import LogoutButton from './styled/LogoutButton';
 
@@ -18,7 +14,6 @@ const Header = () => {
     auth.onAuthStateChanged((user) => {
       if (user) {
         setCurrentUser(user);
-
         localStorage.setItem('currentUser', user.uid);
       } else {
         setCurrentUser(null);
