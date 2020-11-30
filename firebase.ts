@@ -17,7 +17,9 @@ firebase.initializeApp({
   measurementId:process.env.REACT_APP_MEASUREMENT_ID,
 }
   );
+  if(typeof window !== 'undefined'){
   firebase.analytics();
+  }
 
 }
 

@@ -1,3 +1,4 @@
+import Pages from 'Components/Pages';
 import * as React from 'react';
 import { firestore } from '../../../firebase';
 import SingleUserBet from '../SingleUserBet';
@@ -11,6 +12,7 @@ const HistoryUserBets = () => {
   const [minBetsSlice, setMinBetsSlice] = React.useState(0);
   const [maxBetsSlice, setMaxBetsSlice] = React.useState(5);
   React.useEffect(() => {
+    const fiveHours = 18000000;
     setIsUserLogged(localStorage.getItem('currentUser'));
     const today = Date.now();
     if (isUserLogged) {
@@ -21,7 +23,9 @@ const HistoryUserBets = () => {
       };
       const subscribe = userCollection.onSnapshot((snapshot) => {
         const dataFromCollection = snapshot.docs.map(documentCollection);
-        const EndedUserBets = dataFromCollection.filter((a) => a.couponEndDate < today);
+        const EndedUserBets = dataFromCollection
+          .filter((a) => a.couponEndDate + fiveHours < today)
+          .sort((a, b) => a.couponEndDate - b.couponEndDate);
 
         setEndedUserBets(EndedUserBets);
       });
@@ -30,6 +34,9 @@ const HistoryUserBets = () => {
   }, [isUserLogged]);
 
   React.useEffect(() => {
+    if (historyBetsCurrentPage === 1) {
+      setMinBetsSlice(0);
+    }
     if (historyBetsCurrentPage > 1) {
       setMinBetsSlice(historyBetsCurrentPage - 1 * 5);
     }
@@ -51,6 +58,11 @@ const HistoryUserBets = () => {
             couponEndDate={couponEndDate}
           />
         ))}
+      <Pages
+        pagesNumber={Math.ceil(endedUserBets.length / 5)}
+        setPage={(e) => setHistoryBetsCurrentPage(e)}
+        currentPage={historyBetsCurrentPage}
+      />
     </CurrentBetsWrapper>
   );
 };

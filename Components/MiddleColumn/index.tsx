@@ -14,6 +14,7 @@ import ContentWrapper from './styled/ContentWrapper';
 import { SideBarsContext } from 'Contexts/SideBarsContext';
 import { useRouter } from 'next/router';
 import { BetsContext } from 'Contexts/BetsContext';
+import MoreMatchesWrapper from './styled/MoreMatchesWrapper';
 const MiddleColumn = ({ matches }: MatchesProps) => {
   const { preparedUserBets, addBet } = React.useContext(BetsContext);
   React.useEffect(() => {
@@ -59,32 +60,9 @@ const MiddleColumn = ({ matches }: MatchesProps) => {
         {router.pathname.startsWith('/mecze') ? (
           ' '
         ) : (
-          <>
+          <MoreMatchesWrapper>
             <MoreMatches href="/mecze">Więcej meczy</MoreMatches>
-            <ThreadsWrapper>
-              <LastThreads>
-                <ThreadTitle>Lorem Ipsum</ThreadTitle>
-                <ThreadText>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eu metus pretium,
-                  venenatis leo ac, tempus mauris. Curabitur placerat euismod magna sodales pretium.
-                  Vestibulum ullamcorper tellus molestie congue pharetra. Pellentesque habitant
-                  morbi tristique senectus et netus et malesuada fames ac turpis egestas. Morbi
-                  eleifend, ligula sed commodo dignissim, nibh ipsum pretium justo, et aliquet ante
-                  elit sit amet risus. Maecenas vestibulum, enim quis aliquet fringilla, erat leo
-                  ultrices dolor, vel blandit sem nulla condimentum nulla. Praesent ligula sem,
-                  tempor ac quam consectetur, dignissim placerat quam. Morbi non porttitor dolor.
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eu metus pretium,
-                  venenatis leo ac, tempus mauris. Curabitur placerat euismod magna sodales pretium.
-                  Vestibulum ullamcorper tellus molestie congue pharetra. Pellentesque habitant
-                  morbi tristique senectus et netus et malesuada fames ac turpis egestas. Morbi
-                  eleifend, ligula sed commodo dignissim, nibh ipsum pretium justo, et aliquet ante
-                  elit sit amet risus. Maecenas vestibulum, enim quis aliquet fringilla, erat leo
-                  ultrices dolor, vel blandit sem nulla condimentum nulla. Praesent ligula sem,
-                  tempor ac quam consectetur, dignissim placerat quam. Morbi non porttitor dolor.
-                </ThreadText>
-              </LastThreads>
-            </ThreadsWrapper>
-          </>
+          </MoreMatchesWrapper>
         )}
       </ContentWrapper>
     </MiddleContainer>

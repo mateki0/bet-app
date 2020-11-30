@@ -11,6 +11,7 @@ const ActualUserBets = () => {
   const [minBetsSlice, setMinBetsSlice] = React.useState(0);
   const [maxBetsSlice, setMaxBetsSlice] = React.useState(5);
   React.useEffect(() => {
+    const fiveHours = 18000000;
     setIsUserLogged(localStorage.getItem('currentUser'));
     const today = Date.now();
     if (isUserLogged) {
@@ -22,7 +23,7 @@ const ActualUserBets = () => {
       const subscribe = userCollection.onSnapshot((snapshot) => {
         const dataFromCollection = snapshot.docs.map(documentCollection);
         const actualBets = dataFromCollection
-          .filter((a) => a.couponEndDate > today)
+          .filter((a) => a.couponEndDate + fiveHours > today)
           .sort((a, b) => a.couponEndDate - b.couponEndDate);
         setActualUserBets(actualBets);
       });

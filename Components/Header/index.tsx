@@ -34,12 +34,7 @@ const Header = () => {
       <Navigation>
         <Menu>
           <AppName>E-Sport Bet App</AppName>
-          <InputWrapper>
-            <SearchInput name="search" placeholder="Wyszukaj gracza lub drużynę" />
-            <SearchButton>
-              <Loupe width="20px" height="20px" />
-            </SearchButton>
-          </InputWrapper>
+
           <NavList>
             <NavListItem>
               <Link href="/">Strona Główna</Link>
@@ -47,9 +42,7 @@ const Header = () => {
             <NavListItem>
               <Link href="/mecze">Mecze</Link>
             </NavListItem>
-            <NavListItem>
-              <Link href="/wiadomosci">Wiadomości</Link>
-            </NavListItem>
+
             <NavListItem>
               <Link href="/konto">Konto</Link>
             </NavListItem>
