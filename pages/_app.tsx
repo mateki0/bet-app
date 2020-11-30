@@ -1,7 +1,8 @@
-import { BetsProvider } from 'BetsContext';
+import { BetsProvider } from 'Contexts/BetsContext';
+import { SideBarsProvider } from 'Contexts/SideBarsContext';
 import * as React from 'react';
 import { createGlobalStyle } from 'styled-components';
-
+import 'react-slidedown/lib/slidedown.css';
 const GlobalStyle = createGlobalStyle`
 body {
   @font-face{
@@ -27,8 +28,10 @@ const MyApp = ({ Component, pageProps }) => {
   }, []);
   return (
     <BetsProvider>
-      <GlobalStyle />
-      <Component {...pageProps} />
+      <SideBarsProvider>
+        <GlobalStyle />
+        <Component {...pageProps} />
+      </SideBarsProvider>
     </BetsProvider>
   );
 };

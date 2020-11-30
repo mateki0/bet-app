@@ -6,7 +6,7 @@ import PossibleWin from './styled/PossibleWin';
 import PossibleWinWrapper from './styled/PossibleWinWrapper';
 import ValueInput from './styled/ValueInput';
 import ValueWrapper from './styled/ValueWrapper';
-import { BetsContext } from 'BetsContext';
+import { BetsContext } from 'Contexts/BetsContext';
 import { firestore } from '../../../firebase';
 import ChangeValueButton from './styled/ChangeValueButton';
 const roundAccurately = (number, decimalPlaces) =>

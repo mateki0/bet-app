@@ -1,17 +1,16 @@
 import * as React from 'react';
-
 import SideHeading from './styled/SideHeading';
 import SideItem from './styled/SideItem';
 import SideItemsList from './styled/SideItemsList';
-import { BetsContext } from 'BetsContext';
+import { BetsContext } from 'Contexts/BetsContext';
 import BetsBarContainer from './styled/BetsBarContainer';
-
 import PlaceBet from './PlaceBet';
 import SingleMatch from './SingleMatch';
+import { SideBarsContext } from 'Contexts/SideBarsContext';
 
-const BetsBar = ({ isOpen }: { isOpen: boolean }) => {
+const BetsBar = () => {
   const { preparedUserBets } = React.useContext(BetsContext);
-
+  const { isRightBarOpen } = React.useContext(SideBarsContext);
   const totalCourse =
     preparedUserBets && preparedUserBets.length
       ? preparedUserBets
@@ -20,9 +19,9 @@ const BetsBar = ({ isOpen }: { isOpen: boolean }) => {
             return a * b;
           })
       : 0;
-  console.log(preparedUserBets);
+
   return (
-    <BetsBarContainer isOpen={isOpen}>
+    <BetsBarContainer isOpen={isRightBarOpen}>
       <SideHeading>Twoje zakłady</SideHeading>
       <SideItemsList>
         {preparedUserBets.map(

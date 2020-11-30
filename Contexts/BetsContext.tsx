@@ -12,7 +12,7 @@ type PreparedUserBets = {
   matchId: number;
   date: number;
 };
-type ContextTypes = {
+type BetsContextTypes = {
   preparedUserBets: PreparedUserBets[];
   addBet: (
     team1Name: string,
@@ -26,7 +26,7 @@ type ContextTypes = {
   ) => void;
   deleteBet: (matchId: number) => void;
 };
-export const BetsContext = React.createContext<ContextTypes | undefined>(undefined);
+export const BetsContext = React.createContext<BetsContextTypes | undefined>(undefined);
 
 const ADD_BET = 'ADD_BET';
 const DELETE_BET = 'DELETE_BET';

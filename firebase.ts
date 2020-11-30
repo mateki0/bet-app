@@ -17,7 +17,9 @@ firebase.initializeApp({
   measurementId:process.env.REACT_APP_MEASUREMENT_ID,
 }
   );
-firebase.analytics();
+  firebase.analytics();
+
 }
+
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();

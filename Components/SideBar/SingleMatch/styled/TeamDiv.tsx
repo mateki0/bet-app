@@ -12,7 +12,7 @@ const TeamDiv = styled.div<{ backgroundSrc: string; isActive: boolean; isFirst: 
   box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
-  margin: 10px 0;
+  margin: 10px 5px;
   padding: 10px 0;
   width: 150px;
 
@@ -49,6 +49,9 @@ const TeamDiv = styled.div<{ backgroundSrc: string; isActive: boolean; isFirst: 
     left: 0;
     right: 0;
     z-index: -1;
+  }
+  @media only screen and (min-width: 1024px) {
+    margin: 10px 0;
   }
 `;
 export default TeamDiv;

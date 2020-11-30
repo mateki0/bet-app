@@ -5,11 +5,13 @@ import SideHeading from './styled/SideHeading';
 import SideItem from './styled/SideItem';
 import SideItemsList from './styled/SideItemsList';
 import { EventsProps } from 'pages';
+import { SideBarsContext } from 'Contexts/SideBarsContext';
 
-const TournamentsBar = ({ events, isOpen }: EventsProps & { isOpen: boolean }) => {
+const TournamentsBar = ({ events }: EventsProps) => {
+  const { isLeftBarOpen } = React.useContext(SideBarsContext);
   if (events) {
     return (
-      <LeftBarContainer isOpen={isOpen}>
+      <LeftBarContainer isOpen={isLeftBarOpen}>
         <SideHeading>Trwające turnieje</SideHeading>
         <SideItemsList>
           {events.map(({ id, name }) => (
@@ -22,7 +24,7 @@ const TournamentsBar = ({ events, isOpen }: EventsProps & { isOpen: boolean }) =
     );
   }
   return (
-    <LeftBarContainer isOpen={isOpen}>
+    <LeftBarContainer isOpen={isLeftBarOpen}>
       <SideHeading>Żaden turniej nie jest aktualnie rozgrywany</SideHeading>
     </LeftBarContainer>
   );

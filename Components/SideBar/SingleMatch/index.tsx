@@ -2,7 +2,7 @@ import DeleteButton from 'Components/SideBar/SingleMatch/styled/DeleteButton';
 import PreparedBetWrapper from 'Components/SideBar/SingleMatch/styled/PreparedBetWrapper';
 import TeamsWrapper from 'Components/SideBar/SingleMatch/styled/TeamsWrapper';
 import * as React from 'react';
-import { BetsContext } from 'BetsContext';
+import { BetsContext } from 'Contexts/BetsContext';
 import DeleteButtonWrapper from 'Components/SideBar/SingleMatch/styled/DeleteButtonWrapper';
 import DateDiv from './styled/DateDiv';
 import Link from 'next/link';

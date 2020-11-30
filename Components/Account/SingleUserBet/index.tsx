@@ -1,9 +1,7 @@
 import SingleMatch from 'Components/SideBar/SingleMatch';
 import * as React from 'react';
 import { SlideDown } from 'react-slidedown';
-import 'react-slidedown/lib/slidedown.css';
 import CouponEndDateWrapper from './styled/CouponEndDateWrapper';
-
 import MatchesWrapper from './styled/MatchesWrapper';
 import ShowAllButton from './styled/ShowAllButton';
 import SingleBetValueWrapper from './styled/SingleBetValueWrapper';
@@ -58,9 +56,9 @@ const SingleUserBet = ({
         </div>
       </SingleBetValueWrapper>
       <ShowAllButton onClick={handleMatchesOpen}>
-        Zobacz wszystkie mecze ({allBets.length})
+        {!isOpen ? 'Zobacz wszystkie mecze' : 'Ukryj mecze'} ({allBets.length})
       </ShowAllButton>
-      <MatchesWrapper>
+      <MatchesWrapper isOpen={isOpen}>
         {allBets.map(({ team1Name, team1Id, team2Name, team2Id, course, bet, date }, id) => (
           <SlideDown className={'my-dropdown-slidedown'} key={id}>
             {isOpen ? (

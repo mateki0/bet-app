@@ -29,6 +29,6 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx", "BetsContext.tsx"
+    "**/*.tsx", "Contexts/BetsContext.tsx"
   ]
 }

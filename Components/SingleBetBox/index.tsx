@@ -14,7 +14,7 @@ import TeamName from './styled/TeamName';
 import TeamsBox from './styled/TeamsBox';
 import TournamentName from './styled/TournamentName';
 import Star from '../../assets/icons/star.svg';
-import { BetsContext } from 'BetsContext';
+import { BetsContext } from 'Contexts/BetsContext';
 
 interface BoxProps {
   match: {
