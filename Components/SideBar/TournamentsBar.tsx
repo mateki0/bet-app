@@ -16,7 +16,9 @@ const TournamentsBar = ({ events }: EventsProps) => {
         <SideItemsList>
           {events.map(({ id, name }) => (
             <SideItem key={id}>
-              <SideButton>{name}</SideButton>
+              <SideButton>
+                {name} <Chevron width="16px" height="16px" fill="#FFF" />
+              </SideButton>
             </SideItem>
           ))}
         </SideItemsList>
