@@ -6,8 +6,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "postbuild": "next-on-netlify",
-    "start": "next start"
+    "start": "next start",
+    "export": "npm run build && next export",
+    "postexport": "node scripts/postbuild.js"
   },
   "dependencies": {
     "@svgr/webpack": "^5.4.0",
