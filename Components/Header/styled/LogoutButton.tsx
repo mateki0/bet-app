@@ -7,6 +7,7 @@ const LogoutButton = styled.button`
   font-weight: medium;
   background-color: transparent;
   border: none;
+  padding: 0;
   &:hover {
     cursor: pointer;
   }

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const MoreMatches = styled.a`
   margin-top: 50px;
   text-align: center;
-  padding: 30px 0;
+  padding: 30px 30px;
   font-size: 36px;
   font-weight: bold;
   border: none;
@@ -15,9 +15,6 @@ const MoreMatches = styled.a`
 
   &:hover {
     box-shadow: 0 0 0 0 #cecece;
-  }
-  @media only screen and (min-width: 1024px) {
-    width: 50%;
   }
 `;
 

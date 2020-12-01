@@ -45,9 +45,15 @@ const MiddleColumn = ({ matches }: MatchesProps) => {
   } = React.useContext(SideBarsContext);
   return (
     <MiddleContainer>
-      <OpenSideBar isLeft onClick={handleToggleLeftBar} isLeftBarOpen={isLeftBarOpen}>
-        <Chevron />
-      </OpenSideBar>
+      {!router.pathname.startsWith('/mecze') ? (
+        <>
+          <OpenSideBar isLeft onClick={handleToggleLeftBar} isLeftBarOpen={isLeftBarOpen}>
+            <Chevron />
+          </OpenSideBar>
+        </>
+      ) : (
+        ''
+      )}
       <OpenSideBar onClick={handleToggleRightBar} isRightBarOpen={isRightBarOpen}>
         <Chevron />
       </OpenSideBar>

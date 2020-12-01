@@ -6,7 +6,7 @@ import SideItem from './styled/SideItem';
 import SideItemsList from './styled/SideItemsList';
 import { EventsProps } from 'pages';
 import { SideBarsContext } from 'Contexts/SideBarsContext';
-import Chevron from '../../assets/icons/chevron.svg';
+import SingleSideBarEvent from './SingleSideBarEvent';
 const TournamentsBar = ({ events }: EventsProps) => {
   const { isLeftBarOpen } = React.useContext(SideBarsContext);
   if (events) {
@@ -14,12 +14,14 @@ const TournamentsBar = ({ events }: EventsProps) => {
       <LeftBarContainer isOpen={isLeftBarOpen}>
         <SideHeading>Trwające turnieje</SideHeading>
         <SideItemsList>
-          {events.map(({ id, name }) => (
-            <SideItem key={id}>
-              <SideButton>
-                {name} <Chevron width="16px" height="16px" fill="#FFF" />
-              </SideButton>
-            </SideItem>
+          {events.map(({ id, name, dateStart, dateEnd }) => (
+            <>
+              <SideItem key={id}>
+                <SideButton>{name}</SideButton>
+              </SideItem>
+
+              <SingleSideBarEvent dateStart={dateStart} dateEnd={dateEnd} />
+            </>
           ))}
         </SideItemsList>
       </LeftBarContainer>
