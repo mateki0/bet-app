@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const SideButton = styled.a`
+const SideButton = styled.button`
   background-color: transparent;
   border: none;
   color: #fff;
