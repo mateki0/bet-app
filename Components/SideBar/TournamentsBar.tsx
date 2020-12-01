@@ -15,13 +15,13 @@ const TournamentsBar = ({ events }: EventsProps) => {
         <SideHeading>Trwające turnieje</SideHeading>
         <SideItemsList>
           {events.map(({ id, name, dateStart, dateEnd }) => (
-            <>
-              <SideItem key={id}>
+            <div key={id}>
+              <SideItem>
                 <SideButton>{name}</SideButton>
               </SideItem>
 
               <SingleSideBarEvent dateStart={dateStart} dateEnd={dateEnd} />
-            </>
+            </div>
           ))}
         </SideItemsList>
       </LeftBarContainer>

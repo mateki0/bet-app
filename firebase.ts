@@ -12,7 +12,7 @@ const firebaseConfig = {
   messagingSenderId: "766274440080",
   appId: "1:766274440080:web:da601e2acbef2e575b8115"
 };
-if (!firebase.apps.length) {
+
 firebase.initializeApp({
   ...firebaseConfig,
   measurementId:process.env.REACT_APP_MEASUREMENT_ID,
@@ -22,6 +22,6 @@ firebase.initializeApp({
   firebase.analytics();
   }
 
-}
+
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
